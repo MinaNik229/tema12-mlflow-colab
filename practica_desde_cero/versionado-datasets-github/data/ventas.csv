@@ -1,5 +1,5 @@
-id_venta,fecha,producto,monto
-1,2025-01-01,Laptop,15000
-2,2025-01-02,Mouse,350
-3,2025-01-03,Teclado,800
-4,2025-01-04,Monitor,4200
+id_venta,fecha,producto,categoria,monto
+1,2025-01-01,Laptop,Computo,15000
+2,2025-01-02,Mouse,Accesorios,350
+3,2025-01-03,Teclado,Accesorios,800
+4,2025-01-04,Monitor,Computo,4200
