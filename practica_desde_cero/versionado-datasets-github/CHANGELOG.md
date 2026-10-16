@@ -1,4 +1,8 @@
 # Changelog
 
+## v1.1.0 - 2025-01-15
+- Se agrega registro de venta de Monitor.
+- Validación de consistencia en columna monto.
+
 ## v1.0.0 - 2025-01-10
 - Dataset inicial con 3 registros de ventas.
