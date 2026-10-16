@@ -1,5 +1,7 @@
 # Práctica: Git, GitHub, versionado de datasets y MLflow en Google Colab
 
+https://colab.research.google.com/drive/17Q4GbCtioqjnHi-26Q_CHwSTDbPnN282?usp=sharing
+
 Este repositorio contiene una práctica guiada para trabajar con **Git, GitHub y MLflow desde Google Colab**.
 
 El objetivo es comprender dos aspectos diferentes de la reproducibilidad en proyectos de Machine Learning:
