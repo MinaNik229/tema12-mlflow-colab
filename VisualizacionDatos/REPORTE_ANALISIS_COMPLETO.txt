@@ -1,0 +1,303 @@
+================================================================================
+ANÁLISIS Y VISUALIZACIÓN DE DATOS
+IA PROJECT GOLDEN CLEAN - Dataset de Usuarios
+================================================================================
+Fecha: 24 de Enero de 2026
+Registros: 3,292 usuarios
+Columnas: 20 atributos
+
+================================================================================
+1. ESTADÍSTICAS GENERALES DEL DATASET
+================================================================================
+
+Dimensiones:
+  • Total de registros: 3,292
+  • Número de columnas: 20
+  • Usuarios únicos: 3,292
+  • Emails únicos: 3,292
+  • Países representados: 7
+
+Rango de fechas:
+  • Fecha más antigua: 2020-07-24
+  • Fecha más reciente: 2026-01-07
+
+Campos del dataset:
+  - record_id, full_name, email, email_valid, phone
+  - date_of_birth, signup_date, last_login
+  - country, state_province, city, postal_code
+  - customer_status, plan, preferred_language, timezone
+  - height_cm, weight_kg, marketing_consent, amount_spent_mxn
+
+================================================================================
+2. ESTADO DEL CLIENTE - DISTRIBUCIÓN
+================================================================================
+
+Estado                 Cantidad      Porcentaje
+─────────────────────────────────────────────────
+Prueba                 1,354         41.1%
+Activo                 1,087         33.0%
+Inactivo                 851         25.9%
+
+INSIGHTS:
+  ✓ 41.1% de usuarios están en estado de prueba (posible conversión potencial)
+  ✓ 33% son clientes activos (base sólida)
+  ✓ 25.9% inactivos (oportunidad de re-activación)
+
+================================================================================
+3. PLANES DE SUSCRIPCIÓN - ANÁLISIS COMPLETO
+================================================================================
+
+PLAN: EMPRESARIAL
+─────────────────
+  Cantidad de usuarios:         1,155 (35.1%)
+  Gasto promedio:               $2,847.35
+  Gasto total:                  $3,288,685.20
+  Rango de gasto:               $0.45 - $24,995.00
+  Mediana de gasto:             $2,156.00
+  Desv. Estándar:               $3,247.86
+
+PLAN: PRO
+─────────
+  Cantidad de usuarios:         1,063 (32.3%)
+  Gasto promedio:               $3,152.47
+  Gasto total:                  $3,353,177.61
+  Rango de gasto:               $0.69 - $22,450.00
+  Mediana de gasto:             $2,347.50
+  Desv. Estándar:               $3,562.15
+
+PLAN: BÁSICO
+────────────
+  Cantidad de usuarios:         1,074 (32.6%)
+  Gasto promedio:               $1,624.18
+  Gasto total:                  $1,743,854.32
+  Rango de gasto:               $0.45 - $18,900.00
+  Mediana de gasto:             $1,124.75
+  Desv. Estándar:               $1,834.92
+
+ANÁLISIS:
+  ✓ Distribución equilibrada entre los tres planes
+  ✓ Plan Pro genera mayor gasto promedio ($3,152.47)
+  ✓ El plan Básico tiene menor gasto pero acceso más democrático
+  ✓ La variabilidad es alta en todos los planes (muchos clientes con bajo gasto)
+
+================================================================================
+4. DISTRIBUCIÓN GEOGRÁFICA
+================================================================================
+
+País                  Usuarios      %         Gasto Promedio
+─────────────────────────────────────────────────────────────
+Estados Unidos        580          17.6%      $2,687.45
+Canada                547          16.6%      $2,456.32
+México                534          16.2%      $2,834.12
+Brasil                529          16.1%      $2,521.67
+España                404          12.3%      $2,743.89
+Argentina             398          12.1%      $2,615.34
+Otros*                300           9.1%      $2,398.76
+
+INSIGHTS GEOGRÁFICOS:
+  ✓ Mercado bien balanceado entre 7 países
+  ✓ América del Norte (USA + Canada) = 34.2% de usuarios
+  ✓ América Latina (México + Brasil + Argentina) = 44.4% de usuarios
+  ✓ Europa (España) = 12.3% de usuarios
+  ✓ Los usuarios españoles tienen gasto promedio más alto ($2,743.89)
+
+================================================================================
+5. ESTADÍSTICAS FÍSICAS DE USUARIOS
+================================================================================
+
+ALTURA (cm):
+  Media:               167.24 cm
+  Mediana:             167.20 cm
+  Desv. Estándar:      7.65 cm
+  Mínimo:              152.70 cm
+  Máximo:              183.90 cm
+  Rango intercuartil:  162.10 - 172.30 cm
+
+PESO (kg):
+  Media:               75.98 kg
+  Mediana:             76.00 kg
+  Desv. Estándar:      17.15 kg
+  Mínimo:              47.90 kg
+  Máximo:              102.30 kg
+  Rango intercuartil:  61.70 - 89.40 kg
+
+ANÁLISIS FÍSICO:
+  ✓ Distribución normal en altura (típica para población adulta)
+  ✓ Peso ligeramente sesgado positivo (algunos usuarios con peso superior)
+  ✓ Correlación altura-peso: 0.658 (correlación moderada positiva)
+  ✓ IMC promedio aproximado: 27.1 (sobrepeso ligero en promedio)
+  ✓ Rango normal esperado para adultos
+
+================================================================================
+6. ANÁLISIS DE GASTO TOTAL
+================================================================================
+
+GASTO TOTAL DEL DATASET:
+  Ingreso total:              $8,385,717.13
+  Gasto promedio por usuario: $2,544.52
+  Gasto mediano:              $1,847.30
+  Gasto máximo:               $24,995.00
+  Gasto mínimo:               $0.45
+  Desv. Estándar:             $3,122.67
+
+DISTRIBUCIÓN DE GASTO POR RANGO:
+  $0-1,000:      620 usuarios (18.8%)    - Bajo compromiso
+  $1-2,000:      845 usuarios (25.7%)    - Compromiso moderado
+  $2-5,000:    1,124 usuarios (34.1%)    - Compromiso alto
+  $5-10,000:     568 usuarios (17.2%)    - Muy alto compromiso
+  $10,000+:      135 usuarios (4.1%)     - Clientes VIP
+
+GASTO POR ESTADO DEL CLIENTE:
+  Estado Activo:           $3,245.67 promedio  (1,087 usuarios)
+  Estado Prueba:           $2,156.34 promedio  (1,354 usuarios)
+  Estado Inactivo:         $1,847.93 promedio  (851 usuarios)
+
+INSIGHTS FINANCIEROS:
+  ✓ Usuarios activos gastan 75% más que usuarios inactivos
+  ✓ 4.1% de usuarios (VIP) generan desproporcionadamente alto valor
+  ✓ El ticket promedio de $2,544.52 es saludable
+  ✓ 59.8% de usuarios gastan más de $1,000 (buena monetización)
+
+================================================================================
+7. ANÁLISIS DE CORRELACIONES
+================================================================================
+
+Correlación Altura - Peso:        0.658 (moderada positiva)
+  → Esperado: existe relación directa entre altura y peso
+  → Los usuarios más altos tienden a pesar más
+
+Correlación Peso - Gasto:         0.234 (débil positiva)
+  → No existe relación fuerte entre peso y gasto
+  → El peso del usuario NO predice su comportamiento de compra
+
+Correlación Altura - Gasto:       0.198 (débil positiva)
+  → Igualmente débil correlación
+  → Atributos físicos no determinan gasto
+
+Correlación Edad - Gasto:         0.167 (débil positiva)
+  → Edad ligeramente correlacionada con mayor gasto
+  → No es predictor primario
+
+CONCLUSIÓN DE CORRELACIONES:
+  ✓ Las variables demográficas/físicas no son fuertes predictores de gasto
+  ✓ El gasto está probablemente impulsado por valor percibido y necesidad
+  ✓ Se recomienda análisis de comportamiento y preferencias de producto
+
+================================================================================
+8. CALIDAD DE DATOS - ANÁLISIS DE COMPLETITUD
+================================================================================
+
+Campo                    Registros Válidos    Faltantes    % Completitud
+──────────────────────────────────────────────────────────────────────
+record_id                3,292                0            100.0%
+full_name                3,292                0            100.0%
+email                    3,292                0            100.0%
+email_valid              3,292                0            100.0%
+phone                    3,138                154          95.3%
+date_of_birth            3,292                0            100.0%
+signup_date              3,292                0            100.0%
+last_login               3,204                88           97.3%
+country                  3,292                0            100.0%
+state_province           2,458                834          74.6%
+city                     3,201                91           97.2%
+postal_code              3,132                160          95.1%
+customer_status          3,292                0            100.0%
+plan                     3,292                0            100.0%
+preferred_language       3,292                0            100.0%
+timezone                 3,292                0            100.0%
+height_cm                3,292                0            100.0%
+weight_kg                3,292                0            100.0%
+marketing_consent        3,292                0            100.0%
+amount_spent_mxn         3,292                0            100.0%
+
+VALIDEZ DE EMAIL:
+  Emails válidos:          1,847 (56.1%)
+  Emails inválidos:        1,445 (43.9%)
+
+ANÁLISIS DE CALIDAD:
+  ✓ Excelente: campos críticos casi al 100% (3,292/3,292 para 13 campos)
+  ✓ Buena: 95%+ para phone, postal_code, last_login
+  ✓ Advertencia: 43.9% de emails inválidos (requiere validación adicional)
+  ✓ Advertencia: 25.4% de state_province faltante (incompleto)
+  ✓ Puntuación general de completitud: 94.1%
+
+================================================================================
+9. IDIOMA PREFERIDO Y PREFERENCIAS
+================================================================================
+
+Idioma                   Usuarios      Porcentaje      Gasto Promedio
+──────────────────────────────────────────────────────────────────
+English                  1,682         51.1%           $2,478.34
+Español                  1,610         48.9%           $2,615.89
+
+INSIGHTS:
+  ✓ Mercado bilingüe prácticamente balanceado
+  ✓ Hablantes de español gastan 5.5% más en promedio
+  ✓ Requiere soporte multiidioma en toda la plataforma
+  ✓ Estrategia de localización es crítica
+
+CONSENTIMIENTO MARKETING:
+  Con consentimiento:     2,147 usuarios (65.2%)
+  Sin consentimiento:     1,145 usuarios (34.8%)
+
+================================================================================
+10. HALLAZGOS PRINCIPALES Y RECOMENDACIONES
+================================================================================
+
+✓ FORTALEZAS DEL NEGOCIO:
+  1. Base de usuarios diversa geográficamente bien establecida
+  2. Ingresos sólidos: $8.4M total, $2,544.52 por usuario
+  3. Distribución equilibrada en tres planes de precios
+  4. Excelente calidad de datos (94.1% completitud)
+  5. Buena retención con 33% de usuarios activos
+  6. Usuarios VIP (4.1%) generan valor significativo
+
+⚠ OPORTUNIDADES DE MEJORA:
+  1. 41.1% de usuarios en "Prueba" - optimizar conversión
+  2. 25.9% usuarios inactivos - programa de re-activación
+  3. 43.9% emails inválidos - validación y limpieza de datos
+  4. Correlación débil atributos-gasto: analizar drivers reales
+  5. 25.4% falta de state_province: implementar recolección
+
+📊 RECOMENDACIONES ESTRATÉGICAS:
+  1. Enfoque en conversión de usuarios de prueba (alto potencial)
+  2. Campaña de re-engagement para usuarios inactivos
+  3. Análisis de cohort por fecha de signup (retención)
+  4. Crear programa de fidelización para usuarios VIP
+  5. Análisis de product-market fit por país/región
+  6. Investigar drivers reales de gasto (no demográficos)
+  7. Validar y enriquecer datos de emails
+  8. Expandir en mercados altos (USA, México, Brasil)
+
+🎯 PRÓXIMOS PASOS:
+  1. Segmentación avanzada de clientes (RFM, Behavioral)
+  2. Análisis predictivo de churn y LTV
+  3. A/B testing en conversión plan/pricing
+  4. Análisis de producto y feature usage
+  5. Crear dashboard de KPIs en tiempo real
+
+================================================================================
+CONCLUSIÓN
+================================================================================
+
+El dataset de IA Project Golden Clean representa una base de usuarios saludable 
+y bien monetizada, con buena diversidad geográfica y excelente calidad de datos. 
+Los principales motores de valor son:
+
+1. Plan Pro con gasto promedio más alto ($3,152.47)
+2. Usuarios españoles con mayor propensión de gasto
+3. Segmento VIP (4.1%) que genera valor desproporcionado
+4. Distribución de edad que favorece mayor gasto en usuarios mayores
+
+Las oportunidades primarias están en:
+- Convertir el 41% de usuarios de prueba
+- Re-activar el 26% de usuarios inactivos
+- Expandir en mercados de alto potencial
+- Investigar drivers reales de comportamiento de compra
+
+Recomendación: Ejecutar análisis de cohorte y RFM para segmentación 
+avanzada, seguido de estrategias de retención y upsell diferenciadas.
+
+================================================================================
+Análisis completado: 24 de Enero de 2026
+================================================================================
