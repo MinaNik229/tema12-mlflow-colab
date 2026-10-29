@@ -3,6 +3,7 @@ import argparse
 import mlflow
 import mlflow.sklearn
 import pandas as pd
+import joblib
 
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
@@ -119,7 +120,22 @@ with mlflow.start_run():
         X_train,
         y_train
     )
+    
+    # --------------------------------------------------------
+    # Guardar modelo para despliegue
+    # --------------------------------------------------------
 
+    artifact = {
+        "model": model,
+        "features": list(X.columns)
+    }
+
+    joblib.dump(
+        artifact,
+        "model.pkl"
+    )
+
+    print("Artefacto de despliegue creado: model.pkl")
 
     # --------------------------------------------------------
     # Realizar predicciones
