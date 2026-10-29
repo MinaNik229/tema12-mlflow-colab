@@ -1150,3 +1150,16 @@ Archivo → Guardar una copia en GitHub.
 Nota sobre los tags
 Los tags de Git pertenecen al repositorio completo, no únicamente a la carpeta versionado-datasets-github.
 En esta práctica representan los commits en los que se publicaron las versiones del dataset.
+
+
+---
+
+## T15-T16: FastAPI y Docker
+
+La continuación para despliegue local, API, frontend mínimo, Docker y preparación de **Proyecto Final Fase II** está documentada en:
+
+- [README de la práctica T15-T16](practica_windows_desde_cero/mlflow_project/README.md)
+- [Guía del estudiante](practica_windows_desde_cero/mlflow_project/docs/GUIA_ESTUDIANTE_T15_T16.md)
+- [Guía docente](practica_windows_desde_cero/mlflow_project/docs/GUIA_DOCENTE_T15_T16.md)
+
+La práctica reutiliza el modelo de MLflow, genera `model.pkl`, lo expone mediante FastAPI y valida su ejecución dentro de Docker.
