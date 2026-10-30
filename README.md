@@ -362,3 +362,16 @@ La continuación para despliegue local, API, frontend mínimo, Docker y preparac
 - [Guía docente](practica_windows_desde_cero/mlflow_project/docs/GUIA_DOCENTE_T15_T16.md)
 
 La práctica reutiliza el modelo de MLflow, genera `model.pkl`, lo expone mediante FastAPI y valida su ejecución dentro de Docker.
+
+
+---
+
+## Demostraciones T15-T16 listas para clase
+
+Se añadieron prácticas ejecutables para acompañar los temas de contenerización, API, Docker, despliegue y documentación técnica:
+
+- [Índice de demostraciones T15-T16](demostraciones_t15_t16/README.md)
+- [Tema 15 - Contenerización de modelo de fraude](demostraciones_t15_t16/tema15_contenedorizacion_fraude/README.md)
+- [Tema 16 - Deserción, API, Docker y simulación PaaS](demostraciones_t15_t16/tema16_desercion_api_docker_nube/README.md)
+
+Cada ejemplo incluye un `demo.ps1` para ejecutar la demostración por etapas durante la clase.

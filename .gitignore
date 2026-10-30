@@ -35,3 +35,6 @@ Thumbs.db
 # MODELOS SERIALIZADOS GENERADOS LOCALMENTE
 # ============================================================
 **/model.pkl
+
+# Artefactos de modelos generados localmente
+**/*.pkl
