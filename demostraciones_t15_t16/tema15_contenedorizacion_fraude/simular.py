@@ -8,9 +8,9 @@ model = artifact["model"]
 features = artifact["features"]
 
 casos = pd.DataFrame([
-    {"monto": 18000, "intentos_24h": 6, "es_extranjero": 1, "hora": 2},
-    {"monto": 800, "intentos_24h": 1, "es_extranjero": 0, "hora": 15},
-    {"monto": 14000, "intentos_24h": 5, "es_extranjero": 0, "hora": 14},
+    {"monto": 1000, "intentos_24h": 6, "es_extranjero": 1, "hora": 2},
+    {"monto": 80, "intentos_24h": 1, "es_extranjero": 0, "hora": 15},
+    {"monto": 1400, "intentos_24h": 5, "es_extranjero": 0, "hora": 14},
 ], columns=features)
 
 pred = model.predict(casos)
