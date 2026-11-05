@@ -1,5 +1,5 @@
 param(
-    [ValidateSet("reset", "data", "bootstrap", "monitor", "retrain", "staging", "promote", "pipeline", "ui")]
+    [ValidateSet("reset", "data", "bootstrap", "monitor", "retrain", "staging", "promote", "pipeline", "status", "ui")]
     [string]$Step = "pipeline"
 )
 
