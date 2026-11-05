@@ -375,3 +375,14 @@ Se añadieron prácticas ejecutables para acompañar los temas de contenerizaci�
 - [Tema 16 - Deserción, API, Docker y simulación PaaS](demostraciones_t15_t16/tema16_desercion_api_docker_nube/README.md)
 
 Cada ejemplo incluye un `demo.ps1` para ejecutar la demostración por etapas durante la clase.
+
+
+---
+
+## Tema 17 - Versionado de artefactos
+
+La primera práctica del Módulo 3 está disponible en:
+
+- [Laboratorio Tema 17: construcción y versionado de artefactos](demostraciones_t17_t18/tema17_versionado_artefactos_mlflow/README.md)
+
+Incluye flujo completo desde clonación del repositorio, validación de datos y entrenamiento hasta creación de v1/v2, MLflow, comparación de versiones y trazabilidad con Git.
