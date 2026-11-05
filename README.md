@@ -40,7 +40,8 @@ tema12-mlflow-colab/
 │
 ├── demostraciones_t17_t18/
 │   ├── README.md
-│   └── tema17_versionado_artefactos_mlflow/
+│   ├── tema17_versionado_artefactos_mlflow/
+│   └── tema18_reentrenamiento_despliegue_automatizado/
 │
 ├── ia_project_dirty_dataset_6000.csv
 ├── ia_project_dirty_dataset_dictionary.md
@@ -244,6 +245,52 @@ Incluye:
 Índice del Módulo 3:
 
 - [Demostraciones T17-T18](demostraciones_t17_t18/README.md)
+
+---
+
+# Tema 18 - Reentrenamiento y despliegue automatizado
+
+Práctica actual:
+
+- [Tema 18: monitoreo, trigger, retraining, staging y promoción](demostraciones_t17_t18/tema18_reentrenamiento_despliegue_automatizado/README.md)
+
+La demostración implementa de forma local y didáctica:
+
+```text
+champion
+  ↓
+monitoreo RMSE
+  ↓
+trigger por umbral
+  ↓
+reentrenamiento
+  ↓
+challenger
+  ↓
+staging
+  ↓
+pruebas automatizadas
+  ↓
+PROMOTE / REJECT
+  ↓
+nuevo champion o conservación del anterior
+```
+
+Incluye:
+
+- `RandomForestRegressor`;
+- MLflow Tracking;
+- MLflow Model Registry;
+- aliases `champion`, `challenger` y `previous_champion`;
+- trigger basado en RMSE;
+- reentrenamiento con nuevos datos;
+- staging local;
+- pruebas de datos con pytest;
+- validación del challenger;
+- pipeline local automatizado;
+- instrucciones completas para Windows y macOS/Linux.
+
+La práctica es una simulación educativa: el alias `champion` representa la versión aprobada, pero no implica un despliegue cloud real.
 
 ---
 

@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+mlflow.db
+mlruns/
+mlartifacts/
+data/train.csv
+data/production_batch.csv
+reports/*.json
+reports/staging_batch.csv
