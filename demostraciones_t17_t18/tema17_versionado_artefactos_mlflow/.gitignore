@@ -1,0 +1,10 @@
+.venv/
+__pycache__/
+*.pyc
+mlflow.db
+mlruns/
+
+# El repositorio general ignora archivos .pkl.
+# Para ESTE laboratorio se permite versionar los artefactos pequeños
+# generados dentro de models/ con fines didácticos.
+!models/**/*.pkl
