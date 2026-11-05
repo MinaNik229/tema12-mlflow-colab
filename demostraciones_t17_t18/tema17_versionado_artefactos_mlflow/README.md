@@ -975,3 +975,27 @@ El objetivo central del Tema 17 es pasar de:
 a:
 
 **"sé exactamente qué versión tengo, cómo fue generada, cómo rindió y por qué la conservaría o reemplazaría".**
+
+
+---
+
+# Continuación: Tema 18
+
+En este laboratorio aprendiste a crear, comparar y seleccionar versiones de un modelo.
+
+El siguiente paso es responder:
+
+> **¿Qué ocurre cuando el modelo que seleccionamos comienza a perder desempeño?**
+
+Continúa con:
+
+- [Tema 18 - Reentrenamiento y despliegue automatizado](../tema18_reentrenamiento_despliegue_automatizado/README.md)
+
+```text
+T17
+versionar y seleccionar
+        ↓
+T18
+monitorear, activar trigger,
+reentrenar, validar y promover
+```
