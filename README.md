@@ -1,127 +1,256 @@
-# Prácticas de gestión de datos, Git/GitHub y MLflow
+# Prácticas de Gestión de Proyectos de Inteligencia Artificial
 
-**Repositorio de apoyo para ejercicios de limpieza, análisis y visualización de datos, control de versiones y seguimiento de experimentos de Machine Learning.**
+Repositorio didáctico de apoyo para las actividades del curso. Reúne ejercicios de preparación y calidad de datos, visualización, Git/GitHub, MLflow, APIs, Docker, despliegue y MLOps.
 
-Los materiales incluyen notebooks, scripts Python, datasets sintéticos, documentación y prácticas ejecutables tanto en **Google Colab** como en **Windows con Visual Studio Code**.
+**Repositorio:** https://github.com/MinaNik229/tema12-mlflow-colab
 
-**Repositorio:** [MinaNik229/tema12-mlflow-colab](https://github.com/MinaNik229/tema12-mlflow-colab)
+---
 
-## Contenido
-
-1. [Mapa del repositorio](#mapa-del-repositorio)
-2. [Qué se aprende](#qué-se-aprende)
-3. [Requisitos y preparación](#requisitos-y-preparación)
-4. [Práctica de limpieza y calidad de datos](#1-limpieza-y-calidad-de-datos)
-5. [Análisis y visualización](#2-análisis-y-visualización-de-datos)
-6. [Versionado de datasets](#3-versionado-de-datasets-con-git-y-github)
-7. [Seguimiento de experimentos con MLflow](#4-seguimiento-de-experimentos-con-mlflow)
-8. [Google Colab](#ejecución-desde-google-colab)
-9. [Windows y VS Code](#ejecución-local-en-windows-y-vs-code)
-10. [Buenas prácticas y notas](#buenas-prácticas-y-notas)
-
-## Mapa del repositorio
+## Mapa actualizado del repositorio
 
 ```text
 tema12-mlflow-colab/
-├── README.md                              # Guía general (este archivo)
-├── .gitignore                            # Exclusiones de Git
+├── README.md
+├── .gitignore
 │
 ├── Fuentes/
-│   ├── Tema11_EjemLimpieza.ipynb         # Notebook de limpieza y deduplicación
-│   └── subir_dataset.py                  # Ejemplo de automatización de Git con GitPython
-│
-├── ia_project_dirty_dataset_6000.csv    # Datos sintéticos para limpieza
-├── ia_project_dirty_dataset_dictionary.md
-├── ia_project_quality_report.md
+│   ├── Tema11_EjemLimpieza.ipynb
+│   └── subir_dataset.py
 │
 ├── VisualizacionDatos/
-│   ├── README.md                          # Documentación detallada de visualización
-│   ├── 00_INICIO_AQUI.txt
+│   ├── README.md
 │   ├── Analisis_Visualizacion.ipynb
 │   ├── analisis_visualizacion.py
-│   ├── ia_project_golden_clean.csv
-│   ├── dashboard_interactivo.html
-│   ├── index.html
-│   ├── RESUMEN_VISUAL.md
-│   ├── ANALISIS_VISUAL_ASCII.txt
-│   ├── REPORTE_ANALISIS_COMPLETO.txt
-│   └── otros resúmenes e instrucciones
+│   └── recursos de análisis y visualización
 │
-├── versionado-datasets-github/          # Material previo de versionado
+├── versionado-datasets-github/
 │   ├── data/ventas.csv
 │   ├── CHANGELOG.md
 │   └── README.md
 │
-├── practica_desde_cero/                 # Adaptación para Google Colab
-│   ├── README.md                        # Guía detallada y vínculo al notebook de Colab
+├── practica_desde_cero/
+│   ├── README.md
 │   ├── versionado-datasets-github/
-│   │   ├── data/ventas.csv
-│   │   ├── CHANGELOG.md
-│   │   └── README.md
 │   └── mlflow_project/
-│       ├── data.csv
-│       ├── train.py
-│       └── requirements.txt
 │
-├── practica_windows_desde_cero/         # Práctica para Windows y VS Code
-│   ├── versionado-datasets-github/
-│   │   ├── data/ventas.csv
-│   │   ├── CHANGELOG.md
-│   │   └── README.md
-│   └── mlflow_project/
-│       ├── generate_data.py
-│       ├── data.csv
-│       ├── train.py
-│       └── requirements.txt
+├── demostraciones_t15_t16/
+│   ├── README.md
+│   ├── tema15_contenedorizacion_fraude/
+│   └── tema16_desercion_api_docker_nube/
 │
-├── Tema11_ConfigRamaLocal_ET.docx       # Material de apoyo para Git
-└── Tema11_EjemLimpieza_ET.docx          # Material de apoyo para limpieza
+├── demostraciones_t17_t18/
+│   ├── README.md
+│   └── tema17_versionado_artefactos_mlflow/
+│
+├── ia_project_dirty_dataset_6000.csv
+├── ia_project_dirty_dataset_dictionary.md
+├── ia_project_quality_report.md
+├── Tema11_ConfigRamaLocal_ET.docx
+└── Tema11_EjemLimpieza_ET.docx
 ```
 
-> **Importante:** las carpetas `versionado-datasets-github/`, `practica_desde_cero/` y `practica_windows_desde_cero/` contienen **ejercicios o adaptaciones diferentes**. No son tres repositorios Git independientes: todos forman parte de este mismo repositorio.
+> La carpeta antigua `practica_windows_desde_cero/` fue retirada porque las prácticas actuales de T15 y T16 ya contienen instrucciones completas para **Windows, macOS y Linux** y evitan mantener dos versiones paralelas del mismo flujo.
 
-## Qué se aprende
+---
 
-| Área | Actividad | Herramientas |
-|---|---|---|
-| Preparación y calidad | Estandarizar, validar y deduplicar registros | Python, pandas, NumPy |
-| Análisis exploratorio | Examinar distribuciones, correlaciones y perfiles | pandas, Matplotlib, Seaborn |
-| Visualización | Generar gráficos y explorar un dashboard HTML | Python, HTML, Plotly.js |
-| Control de versiones | Registrar cambios, comparar commits y crear tags | Git, GitHub |
-| Machine Learning | Entrenar una regresión logística y medir `accuracy` | scikit-learn |
-| Seguimiento experimental | Guardar hiperparámetros, métricas y modelos | MLflow |
+# Ruta recomendada por tema
 
-**Distinción clave:** Git/GitHub responde **qué cambió en los archivos**; MLflow registra **qué configuración se ejecutó y qué resultados produjo**. Son herramientas complementarias, no sustitutas.
+## Preparación y calidad de datos
 
-## Requisitos y preparación
+Recursos principales:
 
-- [Python](https://www.python.org/downloads/) y **Git** para ejecutar los scripts y versionar archivos.
-- [Visual Studio Code](https://code.visualstudio.com/) para el trabajo local en Windows (recomendado).
-- Una cuenta de [GitHub](https://github.com/) con permisos de escritura si se realizarán operaciones `push`.
-- Como alternativa, una cuenta de Google para usar **Google Colab**.
+- [Dataset sintético](ia_project_dirty_dataset_6000.csv)
+- [Diccionario de datos](ia_project_dirty_dataset_dictionary.md)
+- [Reporte de calidad](ia_project_quality_report.md)
+- [Notebook de limpieza](Fuentes/Tema11_EjemLimpieza.ipynb)
 
-En **PowerShell (Windows)**, revisa las instalaciones antes de descargar nada:
+Objetivo: practicar limpieza, validación, normalización, deduplicación y trazabilidad de datos.
 
-```powershell
-winget --version
-git --version
-py --version
-code --version
+---
+
+## Análisis y visualización
+
+Carpeta:
+
+- [VisualizacionDatos](VisualizacionDatos/README.md)
+
+Incluye notebook, script Python, dataset limpio, dashboard HTML y reportes de apoyo.
+
+---
+
+## Git y versionado de datasets
+
+Práctica:
+
+- [versionado-datasets-github](versionado-datasets-github/README.md)
+
+Se utiliza para comprender:
+
+```text
+archivo
+  ↓
+cambio
+  ↓
+git status
+  ↓
+git add
+  ↓
+git commit
+  ↓
+tag / versión
+  ↓
+GitHub
 ```
 
-Si falta algún programa y `winget` está disponible:
+---
 
-```powershell
-winget install --id Git.Git -e
-winget install --id Microsoft.VisualStudioCode -e
-winget install --id Python.Python.3.12 -e
+## MLflow y seguimiento de experimentos
+
+Para las prácticas anteriores de MLflow y ejecución en Colab:
+
+- [practica_desde_cero](practica_desde_cero/README.md)
+
+Conceptos centrales:
+
+- experimentos;
+- runs;
+- parámetros;
+- métricas;
+- artefactos;
+- comparación de configuraciones.
+
+---
+
+# Tema 15 - Contenerización de una solución de IA
+
+Práctica actual:
+
+- [Tema 15: contenerización de modelo de fraude](demostraciones_t15_t16/tema15_contenedorizacion_fraude/README.md)
+
+El recorrido es:
+
+```text
+GitHub
+  ↓
+entorno virtual
+  ↓
+entrenamiento
+  ↓
+model.pkl
+  ↓
+FastAPI
+  ↓
+POST /predict
+  ↓
+Dockerfile
+  ↓
+docker build
+  ↓
+docker run
+  ↓
+API dentro de un contenedor
 ```
 
-Cierra y vuelve a abrir la terminal después de instalar. Si `py` no está disponible, comprueba `python --version`.
+El README de la práctica contiene instrucciones separadas para:
 
-### Clonar el repositorio
+- Windows / PowerShell;
+- macOS / Linux / Bash-Zsh.
 
-En una terminal de VS Code o PowerShell:
+También incluye `demo.ps1` y `demo.sh` para realizar la demostración por etapas.
+
+---
+
+# Tema 16 - API, Docker, despliegue y documentación
+
+Práctica actual:
+
+- [Tema 16: deserción, API, Docker y simulación PaaS](demostraciones_t15_t16/tema16_desercion_api_docker_nube/README.md)
+
+El recorrido amplía T15:
+
+```text
+modelo
+  ↓
+API
+  ↓
+consumo desde otro programa
+  ↓
+Docker
+  ↓
+estrategia PaaS
+  ↓
+documentación técnica
+  ↓
+Git / GitHub
+```
+
+Incluye:
+
+- FastAPI;
+- consumo mediante `SimulaConsumo.py`;
+- Docker;
+- `Procfile` como referencia de PaaS;
+- plantilla y ejemplo de documentación técnica;
+- instrucciones Windows y macOS/Linux.
+
+Índice conjunto:
+
+- [Demostraciones T15-T16](demostraciones_t15_t16/README.md)
+
+---
+
+# Tema 17 - Construcción y versionado de artefactos
+
+Práctica actual:
+
+- [Tema 17: construcción y versionado de artefactos con MLflow](demostraciones_t17_t18/tema17_versionado_artefactos_mlflow/README.md)
+
+El laboratorio implementa:
+
+```text
+churn.csv
+  ↓
+validación y preprocesamiento
+  ↓
+Random Forest
+  ↓
+v1
+  ├── model.pkl
+  ├── metrics.json
+  ├── metadata.json
+  └── MLflow run
+  ↓
+cambio de hiperparámetro
+  ↓
+v2
+  ├── model.pkl
+  ├── metrics.json
+  ├── metadata.json
+  └── MLflow run
+  ↓
+comparación
+  ↓
+decisión de versión
+```
+
+Incluye:
+
+- instrucciones desde `git clone`;
+- Windows y macOS/Linux;
+- MLflow;
+- comparación v1/v2;
+- selección documentada de versión;
+- actualización del repositorio con Git.
+
+Índice del Módulo 3:
+
+- [Demostraciones T17-T18](demostraciones_t17_t18/README.md)
+
+---
+
+# Cómo obtener el repositorio
+
+## Windows / PowerShell
 
 ```powershell
 cd $HOME\Documents
@@ -130,259 +259,141 @@ cd .\tema12-mlflow-colab
 code .
 ```
 
-Si la carpeta **ya existe**, no vuelvas a clonarla. Entra en ella y, si el árbol de trabajo está limpio, actualiza:
+## macOS / Linux
 
-```powershell
+```bash
+cd ~/Documents
+git clone https://github.com/MinaNik229/tema12-mlflow-colab.git
+cd tema12-mlflow-colab
+code .
+```
+
+Si ya tienes una copia local, **no vuelvas a clonar**.
+
+Primero revisa:
+
+```bash
 git status
-git pull --ff-only origin main
+git status --short
 ```
 
-### Crear un entorno virtual (Windows)
+Si el árbol está limpio:
 
-Desde la raíz del repositorio:
-
-```powershell
-py -m venv .venv
-.\.venv\Scripts\Activate.ps1
-python -m pip install --upgrade pip
+```bash
+git switch main
+git pull origin main
 ```
 
-Si PowerShell bloquea la activación del entorno, en esa misma sesión puedes ejecutar:
+---
+
+# Entornos virtuales
+
+## Windows
 
 ```powershell
+python -m venv .venv
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 .\.venv\Scripts\Activate.ps1
 ```
 
-En VS Code selecciona el intérprete `.venv` mediante **Python: Select Interpreter**. La carpeta `.venv/` se excluye del control de versiones.
+## macOS / Linux
 
-## 1. Limpieza y calidad de datos
-
-**Archivos principales:**
-
-- [`ia_project_dirty_dataset_6000.csv`](ia_project_dirty_dataset_6000.csv): dataset sintético de entrada para realizar ejercicios de calidad.
-- [`ia_project_dirty_dataset_dictionary.md`](ia_project_dirty_dataset_dictionary.md): diccionario de variables y ejemplos de problemas de calidad.
-- [`Fuentes/Tema11_EjemLimpieza.ipynb`](Fuentes/Tema11_EjemLimpieza.ipynb): pipeline de limpieza, normalización, deduplicación y verificaciones de consistencia.
-- [`ia_project_quality_report.md`](ia_project_quality_report.md): reporte de calidad **antes/después** generado para un procesamiento concreto.
-- [`Fuentes/subir_dataset.py`](Fuentes/subir_dataset.py): ejemplo de automatización de commits y envío a GitHub usando **GitPython**.
-
-El dataset de entrada contiene **6,000 registros sintéticos** diseñados para practicar formatos heterogéneos, valores faltantes, duplicados, fechas, correos electrónicos, categorías, monedas y unidades de medida.
-
-### Ejecución sugerida
-
-1. Abre [`Fuentes/Tema11_EjemLimpieza.ipynb`](Fuentes/Tema11_EjemLimpieza.ipynb) en Colab o en VS Code con Jupyter.
-2. Coloca `ia_project_dirty_dataset_6000.csv` en la ubicación esperada por el notebook, o ajusta `SRC_CSV`.
-3. Ejecuta las celdas de normalización, deduplicación y validación.
-4. Examina el CSV y el reporte de calidad resultantes **antes de incorporarlos a Git**.
-
-**Nota:** `Fuentes/subir_dataset.py` contiene rutas y URL de ejemplo que deben configurarse antes de usarse; requiere instalar `GitPython` (`python -m pip install GitPython`). No es necesario ejecutarlo si ya se utiliza Git directamente desde la terminal.
-
-## 2. Análisis y visualización de datos
-
-La carpeta [`VisualizacionDatos/`](VisualizacionDatos/) reúne un dataset limpio para análisis y distintos formatos de presentación de resultados.
-
-**Puntos de entrada recomendados:**
-
-| Recurso | Para qué sirve |
-|---|---|
-| [`VisualizacionDatos/README.md`](VisualizacionDatos/README.md) | Guía detallada de los recursos |
-| [`VisualizacionDatos/00_INICIO_AQUI.txt`](VisualizacionDatos/00_INICIO_AQUI.txt) | Orientación inicial |
-| [`VisualizacionDatos/RESUMEN_VISUAL.md`](VisualizacionDatos/RESUMEN_VISUAL.md) | Resumen en tablas y hallazgos |
-| [`VisualizacionDatos/ia_project_golden_clean.csv`](VisualizacionDatos/ia_project_golden_clean.csv) | Dataset empleado en esta sección |
-| [`VisualizacionDatos/Analisis_Visualizacion.ipynb`](VisualizacionDatos/Analisis_Visualizacion.ipynb) | Análisis paso a paso en notebook |
-| [`VisualizacionDatos/analisis_visualizacion.py`](VisualizacionDatos/analisis_visualizacion.py) | Script para estadísticas y gráficos |
-| [`VisualizacionDatos/dashboard_interactivo.html`](VisualizacionDatos/dashboard_interactivo.html) | Dashboard web para explorar desde un navegador |
-| [`VisualizacionDatos/REPORTE_ANALISIS_COMPLETO.txt`](VisualizacionDatos/REPORTE_ANALISIS_COMPLETO.txt) | Resultados técnicos y análisis detallado |
-
-Para ejecutar el script desde Windows:
-
-```powershell
-python -m pip install pandas numpy matplotlib seaborn
-cd .\VisualizacionDatos
-python .\analisis_visualizacion.py
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
 ```
 
-El script lee `ia_project_golden_clean.csv` desde la carpeta de trabajo. El dashboard HTML también puede abrirse con el navegador; algunas librerías visuales pueden requerir conexión a Internet según su configuración.
-
-**Precaución sobre versiones de datos:** el reporte de calidad de la raíz y los documentos de `VisualizacionDatos/` presentan recuentos distintos en algunos apartados. Trátalos como resultados de artefactos o ejecuciones diferentes hasta verificar sus criterios de limpieza y procedencia; no asumas automáticamente que describen exactamente la misma versión del dataset.
-
-## 3. Versionado de datasets con Git y GitHub
-
-Las carpetas [`practica_windows_desde_cero/versionado-datasets-github/`](practica_windows_desde_cero/versionado-datasets-github/) y [`practica_desde_cero/versionado-datasets-github/`](practica_desde_cero/versionado-datasets-github/) contienen el ejercicio de **evolución de un CSV de ventas**. También existe un ejemplo anterior en [`versionado-datasets-github/`](versionado-datasets-github/).
-
-### Versiones didácticas
-
-| Versión | Cambio | Estructura del CSV |
-|---|---|---|
-| `1.0.0` | Dataset inicial con tres ventas | `id_venta,fecha,producto,monto` |
-| `1.1.0` | Se incorpora una venta de Monitor | Misma estructura |
-| `2.0.0` | Se incorpora el campo `categoria` | Cambia el esquema |
-
-Los cambios se documentan en `CHANGELOG.md`. Un **commit** registra un estado; un **tag** identifica el commit que representa una versión. Los tags pertenecen al repositorio completo, no exclusivamente a una subcarpeta.
-
-### Ejemplo de flujo en PowerShell
-
-Ejecuta estos comandos desde la raíz del repositorio, después de crear o modificar los archivos del dataset:
-
-```powershell
-# Ver qué cambió
-git status
-
-# Preparar solo los archivos de la práctica de Windows
-git add .\practica_windows_desde_cero\versionado-datasets-github
-
-# Guardar la primera versión
-git commit -m "Add initial sales dataset v1.0.0"
-
-# Crear un tag con prefijo para evitar confusiones con otros ejercicios
-git tag dataset-v1.0.0
-
-# Subir el commit y el tag a GitHub
-git push origin main
-git push origin dataset-v1.0.0
-```
-
-Repite el procedimiento para `dataset-v1.1.0` y `dataset-v2.0.0` **solo después** de realizar los cambios correspondientes. Si un tag ya existe, revísalo antes de intentar reutilizarlo o reemplazarlo.
-
-Para comparar versiones, cuando existan ambos tags:
-
-```powershell
-git diff dataset-v1.1.0 dataset-v2.0.0 -- .\practica_windows_desde_cero\versionado-datasets-github
-```
-
-> La práctica para Colab puede usar los nombres `v1.0.0`, `v1.1.0` y `v2.0.0`, mientras que el ejemplo de Windows utiliza el prefijo `dataset-`. Consulta los tags existentes mediante `git tag` y usa los nombres correspondientes a tu ejecución.
-
-## 4. Seguimiento de experimentos con MLflow
-
-Hay dos implementaciones del ejercicio de clasificación:
-
-- [`practica_windows_desde_cero/mlflow_project/`](practica_windows_desde_cero/mlflow_project/): para Windows + VS Code; incluye el generador `generate_data.py`.
-- [`practica_desde_cero/mlflow_project/`](practica_desde_cero/mlflow_project/): adaptada a Colab; incluye `data.csv`, `train.py` y `requirements.txt`.
-
-Ambas usan una **regresión logística de scikit-learn** para clasificar registros sintéticos. El proyecto utiliza `edad`, `ingreso` y `compras` como variables de entrada, y `target` como objetivo.
-
-En cada ejecución, MLflow registra:
-
-- **Parámetros:** `C` y `max_iter`.
-- **Métrica:** `accuracy`.
-- **Modelo:** artefacto registrado como `modelo`.
-
-Cada ejecución constituye un **run** dentro del experimento `Clasificacion_Clientes`.
-
-### Ejecución local en Windows
-
-Desde la raíz del repositorio, con `.venv` activo:
-
-```powershell
-cd .\practica_windows_desde_cero\mlflow_project
-python -m pip install -r requirements.txt
-
-# Generar data.csv nuevamente, si se desea
-python .\generate_data.py
-
-# Entrenar con distintos valores del hiperparámetro C
-python .\train.py --C 0.01
-python .\train.py --C 0.1
-python .\train.py --C 1
-python .\train.py --C 10
-```
-
-A continuación, **sin salir de `mlflow_project`**, inicia el servidor en una terminal:
-
-```powershell
-python -m mlflow server --backend-store-uri sqlite:///mlflow.db --host 127.0.0.1 --port 5000 --workers 1
-```
-
-Abre [http://127.0.0.1:5000](http://127.0.0.1:5000) en tu navegador. La terminal permanecerá ocupada mientras MLflow siga ejecutándose; usa una segunda terminal para otros comandos y presiona `Ctrl+C` para detener el servidor.
-
-En la interfaz de MLflow abre **Experiments → Clasificacion_Clientes** y muestra las columnas `params.C`, `params.max_iter` y `metrics.accuracy` para comparar runs.
-
-## Ejecución desde Google Colab
-
-La guía de [`practica_desde_cero/README.md`](practica_desde_cero/README.md) explica cómo adaptar Git/GitHub y MLflow a Colab y contiene un vínculo al notebook externo de la práctica.
-
-Para abrir la interfaz en Colab, primero debe ejecutarse MLflow dentro de la sesión y quedar escuchando en el puerto 5000. Después se utiliza el proxy interno:
-
-```python
-from google.colab.output import serve_kernel_port_as_iframe
-
-serve_kernel_port_as_iframe(5000, width="100%", height="800")
-```
-
-Esto **no** equivale a abrir `localhost:5000` desde el navegador de tu equipo: el servidor está en la máquina remota de Colab.
-
-Para enviar cambios a GitHub desde Colab puede emplearse un token de acceso de alcance limitado guardado en **Colab Secrets**; nunca se debe incrustar un token en las celdas ni en la URL del repositorio.
-
-## Ejecución local en Windows y VS Code
-
-Una ruta sugerida para quienes comienzan es:
-
-1. Verifica Python, Git y VS Code; instala únicamente las herramientas faltantes.
-2. Clona el repositorio y crea un entorno virtual `.venv`.
-3. Revisa los materiales de limpieza y visualización, o ejecuta directamente las prácticas de Git/MLflow.
-4. Para versionado, modifica el CSV por etapas y registra cada versión mediante `git add`, `git commit` y `git tag`.
-5. Para MLflow, ejecuta `train.py` desde su carpeta y abre la interfaz local en el puerto 5000.
-6. Antes de terminar, revisa `git status` y envía tus cambios a GitHub con `git push`.
-
-No vuelvas a ejecutar `git clone` sobre una carpeta existente: utiliza `git pull --ff-only` cuando sea apropiado y no tengas cambios locales sin resolver.
-
-## Buenas prácticas y notas
-
-- **Trabaja desde la carpeta correcta:** `data.csv` y `mlflow.db` se resuelven desde el directorio de ejecución de los scripts; ejecutar desde otra ruta puede causar errores o crear una base distinta.
-- **No publiques artefactos transitorios:** `.venv/`, `mlflow.db`, `mlruns/` y `mlartifacts/` están contemplados en `.gitignore`.
-- **Conserva el origen de los resultados:** el código fuente y los CSV se versionan con Git; los detalles de cada entrenamiento se registran con MLflow. La base local de MLflow no queda preservada automáticamente en GitHub.
-- **Protege credenciales:** utiliza Git Credential Manager en Windows o Secrets de Colab; no publiques contraseñas ni tokens.
-- **No ejecutes todos los commits de versionado de una sola vez sin revisar:** cada versión debe existir como estado verificable antes de avanzar a la siguiente.
-- **Revisa consistencia de reportes:** si cambian los criterios de deduplicación o la versión del dataset, las métricas y cantidades pueden cambiar; documenta estas diferencias.
-- **Reproducibilidad:** las dependencias están declaradas en archivos `requirements.txt`, pero no todas las versiones están fijadas. Para ejecuciones estrictamente reproducibles conviene documentar también las versiones exactas del entorno.
-
-## Documentación adicional
-
-- [Guía general de la práctica en Colab](practica_desde_cero/README.md)
-- [Guía de visualización de datos](VisualizacionDatos/README.md)
-- [Diccionario del dataset para limpieza](ia_project_dirty_dataset_dictionary.md)
-- [Reporte de calidad de datos](ia_project_quality_report.md)
-- [Material de configuración de ramas de Git](Tema11_ConfigRamaLocal_ET.docx)
-- [Material de limpieza de datos](Tema11_EjemLimpieza_ET.docx)
+Cada práctica tiene su propio `requirements.txt` cuando necesita dependencias específicas.
 
 ---
 
-**Finalidad del repositorio:** servir como espacio didáctico para practicar trazabilidad, control de versiones, preparación de datos, análisis exploratorio y administración de experimentos de Machine Learning.
+# Git/GitHub y MLflow no versionan lo mismo
 
+Una distinción importante durante el curso:
 
+```text
+Git / GitHub
+→ cambios del código, configuración y documentación
+
+MLflow
+→ experimentos, parámetros, métricas y artefactos de modelos
+```
+
+En MLOps normalmente se utilizan juntos.
+
+Ejemplo:
+
+```text
+commit Git
+   ↓
+código reproducible
+
+MLflow run
+   ↓
+configuración + métrica + modelo
+
+versión del modelo
+   ↓
+candidato a promoción/despliegue
+```
 
 ---
 
-## T15-T16: FastAPI y Docker
+# Archivos que normalmente no deben subirse
 
-La continuación para despliegue local, API, frontend mínimo, Docker y preparación de **Proyecto Final Fase II** está documentada en:
+La configuración de `.gitignore` evita varios artefactos locales, por ejemplo:
 
-- [README de la práctica T15-T16](practica_windows_desde_cero/mlflow_project/README.md)
-- [Guía del estudiante](practica_windows_desde_cero/mlflow_project/docs/GUIA_ESTUDIANTE_T15_T16.md)
-- [Guía docente](practica_windows_desde_cero/mlflow_project/docs/GUIA_DOCENTE_T15_T16.md)
+```text
+.venv/
+__pycache__/
+mlflow.db
+mlruns/
+mlartifacts/
+```
 
-La práctica reutiliza el modelo de MLflow, genera `model.pkl`, lo expone mediante FastAPI y valida su ejecución dentro de Docker.
-
-
----
-
-## Demostraciones T15-T16 listas para clase
-
-Se añadieron prácticas ejecutables para acompañar los temas de contenerización, API, Docker, despliegue y documentación técnica:
-
-- [Índice de demostraciones T15-T16](demostraciones_t15_t16/README.md)
-- [Tema 15 - Contenerización de modelo de fraude](demostraciones_t15_t16/tema15_contenedorizacion_fraude/README.md)
-- [Tema 16 - Deserción, API, Docker y simulación PaaS](demostraciones_t15_t16/tema16_desercion_api_docker_nube/README.md)
-
-Cada ejemplo incluye un `demo.ps1` para ejecutar la demostración por etapas durante la clase.
-
+Algunas prácticas didácticas pueden permitir pequeños `.pkl` versionados dentro de una carpeta específica para visualizar el concepto de versiones. Los modelos grandes o checkpoints de deep learning deberían almacenarse en un Model Registry o sistema de artefactos, no directamente en Git.
 
 ---
 
-## Tema 17 - Versionado de artefactos
+# Buenas prácticas
 
-La primera práctica del Módulo 3 está disponible en:
+1. Ejecuta `git status` antes de agregar archivos.
+2. No uses `git add .` automáticamente sin revisar qué vas a versionar.
+3. No publiques contraseñas, tokens ni credenciales.
+4. No sobrescribas una versión de modelo sin documentar por qué.
+5. Una versión nueva no significa automáticamente una versión mejor.
+6. Mantén README, código y estructura del repositorio sincronizados.
+7. Antes de hacer `push`, integra cambios remotos cuando corresponda.
+8. Conserva la trazabilidad entre código, datos, métricas y artefactos.
 
-- [Laboratorio Tema 17: construcción y versionado de artefactos](demostraciones_t17_t18/tema17_versionado_artefactos_mlflow/README.md)
+---
 
-Incluye flujo completo desde clonación del repositorio, validación de datos y entrenamiento hasta creación de v1/v2, MLflow, comparación de versiones y trazabilidad con Git.
+# Finalidad del repositorio
+
+Este repositorio funciona como espacio didáctico para recorrer progresivamente:
+
+```text
+datos
+ ↓
+calidad
+ ↓
+visualización
+ ↓
+Git/GitHub
+ ↓
+MLflow
+ ↓
+modelo
+ ↓
+API
+ ↓
+Docker
+ ↓
+despliegue
+ ↓
+versionado de artefactos
+ ↓
+MLOps
+```
+
+La meta no es únicamente producir modelos, sino aprender a construir soluciones de IA que puedan **reproducirse, probarse, versionarse, desplegarse y mantenerse**.
