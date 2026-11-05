@@ -49,7 +49,6 @@ tema12-mlflow-colab/
 └── Tema11_EjemLimpieza_ET.docx
 ```
 
-> La carpeta antigua `practica_windows_desde_cero/` fue retirada porque las prácticas actuales de T15 y T16 ya contienen instrucciones completas para **Windows, macOS y Linux** y evitan mantener dos versiones paralelas del mismo flujo.
 
 ---
 
