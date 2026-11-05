@@ -839,6 +839,34 @@ Estamos actualizando la referencia de qué versión consideramos aprobada.
 
 ---
 
+# 22A. Revisar aliases desde la terminal
+
+También puedes comprobar rápidamente qué versión apunta a cada alias.
+
+## Windows
+
+```powershell
+python src\status.py
+```
+
+## macOS / Linux
+
+```bash
+python src/status.py
+```
+
+Verás algo semejante a:
+
+```text
+champion           -> versión 2
+challenger         -> versión 2
+previous_champion  -> versión 1
+```
+
+Esto ayuda a visualizar que un alias es una referencia móvil a una versión registrada.
+
+---
+
 # 23. Revisar el resultado en MLflow
 
 Vuelve a iniciar:
@@ -1069,6 +1097,7 @@ Una vez que comprendas el flujo manual, puedes utilizar los scripts auxiliares.
 .\demo.ps1 retrain
 .\demo.ps1 staging
 .\demo.ps1 promote
+.\demo.ps1 status
 .\demo.ps1 ui
 ```
 
@@ -1088,6 +1117,7 @@ bash demo.sh monitor
 bash demo.sh retrain
 bash demo.sh staging
 bash demo.sh promote
+bash demo.sh status
 bash demo.sh ui
 ```
 
