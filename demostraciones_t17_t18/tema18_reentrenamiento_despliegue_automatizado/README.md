@@ -397,6 +397,40 @@ Solo artefactos generados por la demostración:
 
 No elimina el código ni el README.
 
+## Atención: reset_demo.py también elimina el Model Registry local
+
+En esta práctica, MLflow utiliza:
+
+```text
+mlflow.db
+```
+
+como base local para Tracking y Model Registry.
+
+Por lo tanto, después de ejecutar:
+
+```bash
+python src/reset_demo.py
+```
+
+ya **no existe** el modelo registrado ni el alias `champion`.
+
+El orden correcto después de un reset es:
+
+```text
+reset
+  ↓
+generate_data.py
+  ↓
+bootstrap.py
+  ↓
+status.py
+  ↓
+monitor.py
+```
+
+No ejecutes `monitor.py` inmediatamente después de `reset_demo.py`.
+
 ---
 
 # 10. Generar los datos
@@ -510,7 +544,54 @@ max_depth = 5
 
 ---
 
-# 13. ¿Qué significa champion?
+# 13. Verificar que el champion realmente existe
+
+Antes de continuar con monitoreo, verifica el Model Registry desde la terminal.
+
+## Windows
+
+```powershell
+python src\status.py
+```
+
+## macOS / Linux
+
+```bash
+python src/status.py
+```
+
+Después de ejecutar correctamente `bootstrap.py`, debes ver algo semejante a:
+
+```text
+=== ESTADO DEL MODEL REGISTRY ===
+champion           -> versión 1
+challenger         -> no asignado
+previous_champion  -> no asignado
+
+Estado correcto para monitoreo: existe un alias champion.
+```
+
+Si en cambio aparece:
+
+```text
+champion -> no asignado
+```
+
+**no continúes con monitor.py**.
+
+Ejecuta:
+
+```bash
+python data/generate_data.py
+python src/bootstrap.py
+python src/status.py
+```
+
+y confirma que ya exista `champion`.
+
+---
+
+# 14. ¿Qué significa champion?
 
 `champion` es un alias.
 
@@ -536,7 +617,7 @@ sin cambiar el código que busca al `champion`.
 
 ---
 
-# 14. Abrir MLflow
+# 15. Abrir MLflow
 
 Ejecuta:
 
@@ -578,7 +659,7 @@ Ctrl + C
 
 ---
 
-# 15. Monitorear el champion
+# 16. Monitorear el champion
 
 Ahora simularemos que el modelo está operando y recibimos un lote nuevo.
 
@@ -605,7 +686,7 @@ Decisión:       RETRAIN
 
 ---
 
-# 16. ¿Qué es el trigger?
+# 17. ¿Qué es el trigger?
 
 El trigger es una condición que decide si debe iniciarse una acción.
 
@@ -645,7 +726,7 @@ En un proyecto real debe justificarse con:
 
 ---
 
-# 17. Reentrenar manualmente para entender el proceso
+# 18. Reentrenar manualmente para entender el proceso
 
 Antes de automatizarlo, ejecutaremos cada etapa.
 
@@ -679,7 +760,7 @@ max_depth = 8
 
 ---
 
-# 18. ¿Qué significa challenger?
+# 19. ¿Qué significa challenger?
 
 Ahora el Model Registry representa:
 
@@ -699,7 +780,7 @@ Primero debe pasar staging.
 
 ---
 
-# 19. ¿Qué estamos llamando staging?
+# 20. ¿Qué estamos llamando staging?
 
 En un sistema real, staging sería un ambiente separado y controlado.
 
@@ -729,7 +810,7 @@ sin necesitar infraestructura externa.
 
 ---
 
-# 20. Ejecutar validación de staging
+# 21. Ejecutar validación de staging
 
 ## Windows
 
@@ -767,7 +848,7 @@ champion RMSE - challenger RMSE >= 0.20
 
 ---
 
-# 21. Resultado esperado en staging
+# 22. Resultado esperado en staging
 
 Deberías observar aproximadamente:
 
@@ -796,7 +877,7 @@ Primero debe demostrar que cumple criterios.
 
 ---
 
-# 22. Promover el challenger
+# 23. Promover el challenger
 
 Si staging indicó `PROMOTE`:
 
@@ -839,7 +920,7 @@ Estamos actualizando la referencia de qué versión consideramos aprobada.
 
 ---
 
-# 22A. Revisar aliases desde la terminal
+# 23A. Revisar aliases desde la terminal
 
 También puedes comprobar rápidamente qué versión apunta a cada alias.
 
@@ -867,7 +948,7 @@ Esto ayuda a visualizar que un alias es una referencia móvil a una versión reg
 
 ---
 
-# 23. Revisar el resultado en MLflow
+# 24. Revisar el resultado en MLflow
 
 Vuelve a iniciar:
 
@@ -897,7 +978,7 @@ trazabilidad
 
 ---
 
-# 24. Automatizar el flujo completo
+# 25. Automatizar el flujo completo
 
 Hasta ahora ejecutamos manualmente:
 
@@ -921,6 +1002,7 @@ Para repetirlo limpiamente:
 python src\reset_demo.py
 python data\generate_data.py
 python src\bootstrap.py
+python src\status.py
 python src\pipeline.py
 ```
 
@@ -930,12 +1012,13 @@ python src\pipeline.py
 python src/reset_demo.py
 python data/generate_data.py
 python src/bootstrap.py
+python src/status.py
 python src/pipeline.py
 ```
 
 ---
 
-# 25. ¿Qué hace pipeline.py?
+# 26. ¿Qué hace pipeline.py?
 
 ```text
 1. pytest
@@ -965,7 +1048,7 @@ En un entorno real, un orquestador o un pipeline CI/CD podría ejecutar esta ló
 
 ---
 
-# 26. ¿Dónde aparece CI/CD en esta demostración?
+# 27. ¿Dónde aparece CI/CD en esta demostración?
 
 No estamos creando un pipeline cloud real.
 
@@ -1006,7 +1089,7 @@ Más adelante podría ser ejecutado por:
 
 ---
 
-# 27. ¿Qué tipo de trigger usamos?
+# 28. ¿Qué tipo de trigger usamos?
 
 El material distingue distintos tipos de triggers.
 
@@ -1048,7 +1131,7 @@ No todos los proyectos deben usar el mismo trigger.
 
 ---
 
-# 28. Archivos de evidencia generados
+# 29. Archivos de evidencia generados
 
 Durante la ejecución se crean archivos en:
 
@@ -1083,7 +1166,7 @@ Estos reportes están ignorados por Git porque son resultados locales de ejecuci
 
 ---
 
-# 29. Atajos para demostración docente
+# 30. Atajos para demostración docente
 
 Una vez que comprendas el flujo manual, puedes utilizar los scripts auxiliares.
 
@@ -1129,7 +1212,7 @@ bash demo.sh pipeline
 
 ---
 
-# 30. Si quiero repetir la demostración completa
+# 31. Si quiero repetir la demostración completa
 
 ## Windows
 
@@ -1137,6 +1220,7 @@ bash demo.sh pipeline
 .\demo.ps1 reset
 .\demo.ps1 data
 .\demo.ps1 bootstrap
+.\demo.ps1 status
 .\demo.ps1 pipeline
 ```
 
@@ -1146,6 +1230,7 @@ bash demo.sh pipeline
 bash demo.sh reset
 bash demo.sh data
 bash demo.sh bootstrap
+bash demo.sh status
 bash demo.sh pipeline
 ```
 
@@ -1163,7 +1248,7 @@ o en Windows:
 
 ---
 
-# 31. ¿Qué ocurre si el trigger NO se activa?
+# 32. ¿Qué ocurre si el trigger NO se activa?
 
 El pipeline termina sin reentrenar.
 
@@ -1191,7 +1276,7 @@ reentrenar cuando una condición justificada lo requiere
 
 ---
 
-# 32. ¿Qué ocurre si el challenger falla staging?
+# 33. ¿Qué ocurre si el challenger falla staging?
 
 El pipeline NO mueve el alias champion.
 
@@ -1211,7 +1296,7 @@ Esto es una compuerta de calidad.
 
 ---
 
-# 33. Buenas prácticas que representa esta actividad
+# 34. Buenas prácticas que representa esta actividad
 
 1. No reentrenar sin una razón.
 2. Definir un trigger medible.
@@ -1226,7 +1311,7 @@ Esto es una compuerta de calidad.
 
 ---
 
-# 34. Relación con deep learning
+# 35. Relación con deep learning
 
 El flujo conceptual sería el mismo con una red neuronal:
 
@@ -1261,7 +1346,7 @@ Pero el ciclo MLOps se conserva.
 
 ---
 
-# 35. Actualizar Git al finalizar
+# 36. Actualizar Git al finalizar
 
 Los archivos generados localmente están ignorados.
 
@@ -1296,7 +1381,7 @@ git diff
 
 ---
 
-# 36. Si modificaste la práctica y quieres conservar los cambios
+# 37. Si modificaste la práctica y quieres conservar los cambios
 
 Agrega solamente la carpeta del Tema 18:
 
@@ -1327,7 +1412,7 @@ Los alumnos sin permisos sobre el repositorio docente deben trasladar la lógica
 
 ---
 
-# 37. Preguntas de cierre
+# 38. Preguntas de cierre
 
 Al terminar deberías poder responder:
 
@@ -1343,6 +1428,95 @@ Al terminar deberías poder responder:
 10. ¿Qué cambiarías para adaptar el flujo a tu proyecto?
 
 ---
+
+
+---
+
+# Solución de problemas: "Registered Model ... not found"
+
+Si al ejecutar:
+
+```powershell
+python src\monitor.py
+```
+
+aparece un error relacionado con:
+
+```text
+Registered Model with name=Tema18_RandomForest_RMSE not found
+```
+
+significa que MLflow no encuentra todavía el modelo registrado que debería actuar como `champion`.
+
+## ¿Por qué ocurre?
+
+Las causas más comunes son:
+
+1. ejecutaste `monitor.py` antes de `bootstrap.py`;
+2. ejecutaste `reset_demo.py` después de crear el champion;
+3. eliminaste `mlflow.db`;
+4. estás trabajando con una copia local anterior de la práctica.
+
+## Solución recomendada
+
+Desde la carpeta del Tema 18:
+
+### Windows
+
+```powershell
+python data\generate_data.py
+python src\bootstrap.py
+python src\status.py
+```
+
+### macOS / Linux
+
+```bash
+python data/generate_data.py
+python src/bootstrap.py
+python src/status.py
+```
+
+Debes confirmar:
+
+```text
+champion -> versión 1
+```
+
+Solo después ejecuta:
+
+### Windows
+
+```powershell
+python src\monitor.py
+```
+
+### macOS / Linux
+
+```bash
+python src/monitor.py
+```
+
+## El código actual también detecta este problema
+
+En la versión actual, si falta `champion`, ya no deberías recibir únicamente un traceback largo.
+
+El programa mostrará un mensaje semejante a:
+
+```text
+NO SE PUEDE INICIAR EL MONITOREO
+
+No existe el alias 'champion' para el modelo registrado
+'Tema18_RandomForest_RMSE'.
+
+Ejecuta:
+  python data/generate_data.py
+  python src/bootstrap.py
+  python src/status.py
+```
+
+La idea es que el error enseñe cuál es la dependencia faltante.
+
 
 # Resumen final
 
