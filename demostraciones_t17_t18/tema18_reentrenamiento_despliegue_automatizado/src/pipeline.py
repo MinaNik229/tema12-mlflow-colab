@@ -3,7 +3,7 @@ import subprocess
 import sys
 from pathlib import Path
 
-from common import REPORTS_DIR
+from common import REPORTS_DIR, get_alias_version
 from monitor import evaluate_monitoring_batch
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -20,6 +20,15 @@ def main():
     print("PIPELINE LOCAL TEMA 18")
     print("========================================")
 
+    if get_alias_version("champion") is None:
+        print("\nNo existe un champion inicial en el Model Registry.")
+        print("Este pipeline parte de un modelo ya aprobado.")
+        print("\nEjecuta primero:")
+        print("  python data/generate_data.py")
+        print("  python src/bootstrap.py")
+        print("  python src/status.py")
+        raise SystemExit(1)
+
     subprocess.run([sys.executable, "-m", "pytest", "-q"], cwd=ROOT, check=True)
 
     monitor = evaluate_monitoring_batch()
@@ -34,7 +43,9 @@ def main():
     run("retrain.py")
     run("staging_validate.py")
 
-    report = json.loads((REPORTS_DIR / "staging_report.json").read_text(encoding="utf-8"))
+    report = json.loads(
+        (REPORTS_DIR / "staging_report.json").read_text(encoding="utf-8")
+    )
     if report["passed"]:
         run("promote.py")
     else:
