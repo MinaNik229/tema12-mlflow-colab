@@ -1,0 +1,19 @@
+{
+  "version": "v2",
+  "created_at_utc": "2026-11-06T00:27:40.757739+00:00",
+  "features": [
+    "tenure_months",
+    "monthly_charges",
+    "support_calls",
+    "contract_months",
+    "auto_pay"
+  ],
+  "target": "churn",
+  "train_rows": 192,
+  "test_rows": 48,
+  "random_state": 42,
+  "n_estimators": 200,
+  "mlflow_status": "failed",
+  "mlflow_run_id": null,
+  "mlflow_error": "The saved sklearn model references untrusted types. If you are sure loading these types is safe, set the 'skops_trusted_types' parameter when calling 'log_model' or 'save_model' to the list of trusted types. Root error: Untrusted types found in the file: ['sklearn.tree._tree.Tree'].\n\n- sklearn.tree._tree.Tree: sklearn.tree._tree.Tree (the shared node storage for DecisionTree*, RandomForest*, ExtraTrees*, and GradientBoosting* models) stores raw node indices (left_child, right_child, feature) that scikit-learn indexes into without bounds checking. A malicious file can set these to out-of-range values: skops loads the object successfully, but calling .predict() on it can then crash the process (segfault) or read out-of-bounds memory. If you created the file yourself or otherwise fully trust its source, you can load it with trusted=[\"sklearn.tree._tree.Tree\"].\n\nOnly add the specific types you have reviewed and trust to the `trusted` argument; avoid passing everything reported by get_untrusted_types() just to make a file load."
+}

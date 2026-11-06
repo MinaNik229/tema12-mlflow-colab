@@ -1,0 +1,8 @@
+{
+  "version": "v2",
+  "accuracy": 0.9583333333333334,
+  "n_estimators": 200,
+  "test_size": 0.2,
+  "random_state": 42,
+  "mlflow_run_id": null
+}
