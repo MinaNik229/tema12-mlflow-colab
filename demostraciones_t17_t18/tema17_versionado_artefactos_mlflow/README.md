@@ -364,12 +364,145 @@ El PDF solicita revisar valores nulos y tipos de datos. Esta etapa representa un
 
 ---
 
-# 9. Crear v1
+# 9. Entender qué hace train.py antes de ejecutarlo
+
+El archivo:
+
+~~~text
+src/train.py
+~~~
+
+es el script principal de entrenamiento y versionado del laboratorio.
+
+No solamente entrena el modelo. Ejecuta toda esta secuencia:
+
+~~~text
+1. recibe parámetros desde la terminal
+        ↓
+2. carga churn.csv
+        ↓
+3. valida y prepara X / y
+        ↓
+4. divide train / test
+        ↓
+5. crea RandomForestClassifier
+        ↓
+6. entrena con model.fit()
+        ↓
+7. predice el conjunto de test
+        ↓
+8. calcula accuracy
+        ↓
+9. guarda model.pkl
+        ↓
+10. guarda metrics.json
+        ↓
+11. guarda metadata.json
+        ↓
+12. registra parámetros, métrica y modelo en MLflow
+~~~
+
+## ¿Qué significa --version?
+
+Por ejemplo:
+
+~~~text
+--version v1
+~~~
+
+indica el nombre de la versión del artefacto que estamos creando.
+
+Por eso el resultado se guarda en:
+
+~~~text
+models/v1/
+~~~
+
+Si después ejecutamos:
+
+~~~text
+--version v2
+~~~
+
+se crea:
+
+~~~text
+models/v2/
+~~~
+
+## ¿Qué significa n_estimators?
+
+El parámetro correcto se llama:
+
+~~~text
+n_estimators
+~~~
+
+Es un hiperparámetro de Random Forest.
+
+Indica **cuántos árboles de decisión forman el bosque**.
+
+Por ejemplo:
+
+~~~text
+n_estimators = 100
+        ↓
+Random Forest formado por 100 árboles
+~~~
+
+y:
+
+~~~text
+n_estimators = 200
+        ↓
+Random Forest formado por 200 árboles
+~~~
+
+Cada árbol aprende una solución ligeramente diferente y el Random Forest combina sus decisiones.
+
+En clasificación, conceptualmente:
+
+~~~text
+Árbol 1  ─┐
+Árbol 2   │
+Árbol 3   │
+...       ├──> votación / combinación ──> predicción final
+Árbol 100 │
+          ┘
+~~~
+
+Aumentar n_estimators puede hacer que el modelo sea más estable, pero también implica:
+
+- más tiempo de entrenamiento;
+- más memoria;
+- un modelo potencialmente más grande;
+- y **no garantiza automáticamente una mejor métrica**.
+
+Por eso en esta actividad usamos:
+
+~~~text
+v1 → n_estimators = 100
+v2 → n_estimators = 200
+~~~
+
+para comparar dos configuraciones.
+
+> Importante: **v1/v2 es la versión del artefacto**; **100/200 es el valor de un hiperparámetro**. No representan lo mismo.
+
+---
+
+# 10. Crear v1
 
 La primera versión utiliza:
 
 ~~~text
+Modelo:
 RandomForestClassifier
+
+Versión:
+v1
+
+Hiperparámetro:
 n_estimators = 100
 ~~~
 
@@ -385,31 +518,59 @@ python src\train.py --version v1 --n-estimators 100
 python src/train.py --version v1 --n-estimators 100
 ~~~
 
-El script realiza:
+## ¿Qué ocurre internamente?
 
 ~~~text
 churn.csv
   ↓
-validación
-  ↓
-dropna()
+preprocess.py
   ↓
 X / y
   ↓
-train_test_split 80/20
+train_test_split
+80 % entrenamiento
+20 % test
   ↓
-Random Forest
+RandomForestClassifier
+100 árboles
   ↓
-predicciones
+model.fit()
+  ↓
+model.predict()
   ↓
 accuracy
   ↓
-artefactos + MLflow
+model.pkl
+metrics.json
+metadata.json
+  ↓
+MLflow
 ~~~
+
+## ¿Qué debes observar en la terminal?
+
+Al final debe aparecer algo semejante a:
+
+~~~text
+Artefactos locales creados:
+- .../models/v1/model.pkl
+- .../models/v1/metrics.json
+- .../models/v1/metadata.json
+
+ENTRENAMIENTO FINALIZADO
+Versión:        v1
+n_estimators:   100
+Accuracy:       ...
+MLflow status:  logged
+~~~
+
+Primero se crean los tres artefactos locales y **después** se intenta registrar la ejecución en MLflow.
+
+Esto es deliberado: si MLflow tiene un problema, no queremos perder el modelo, las métricas ni sus metadatos.
 
 ---
 
-# 10. Revisar los artefactos de v1
+# 11. Revisar los artefactos de v1
 
 En VS Code abre:
 
@@ -431,11 +592,66 @@ Es el modelo entrenado serializado con Joblib.
 
 ## metrics.json
 
-Guarda la métrica y la configuración principal de esa versión.
+Guarda el resultado cuantitativo y los parámetros principales de esa versión.
+
+Ejemplo:
+
+~~~json
+{
+  "version": "v1",
+  "accuracy": 0.94,
+  "n_estimators": 100,
+  "test_size": 0.2,
+  "random_state": 42,
+  "mlflow_run_id": "..."
+}
+~~~
+
+La idea es poder responder:
+
+~~~text
+¿qué tan bien rindió esta versión?
+¿con qué configuración se obtuvo?
+~~~
 
 ## metadata.json
 
-Agrega información de trazabilidad: variables, número de registros, fecha, semilla y run ID de MLflow.
+Guarda información de trazabilidad que no es una métrica.
+
+Ejemplo:
+
+~~~json
+{
+  "version": "v1",
+  "features": [
+    "tenure_months",
+    "monthly_charges",
+    "support_calls",
+    "contract_months",
+    "auto_pay"
+  ],
+  "target": "churn",
+  "train_rows": 192,
+  "test_rows": 48,
+  "random_state": 42,
+  "n_estimators": 100,
+  "mlflow_status": "logged",
+  "mlflow_run_id": "..."
+}
+~~~
+
+Así podemos diferenciar:
+
+~~~text
+model.pkl
+→ el modelo
+
+metrics.json
+→ cómo rindió
+
+metadata.json
+→ cómo fue construido y de dónde proviene
+~~~
 
 ## ¿Por qué model.pkl no es suficiente?
 
@@ -452,7 +668,119 @@ Un artefacto útil necesita contexto.
 
 ---
 
-# 11. Abrir MLflow
+# 12. Si solo apareció model.pkl y no aparecieron los JSON
+
+En una versión anterior del laboratorio, `model.pkl` se guardaba **antes** del bloque de MLflow, pero `metrics.json` y `metadata.json` se escribían después.
+
+Por lo tanto, si MLflow generaba un error, podía ocurrir esto:
+
+~~~text
+models/v1/
+└── model.pkl
+~~~
+
+sin llegar a crear:
+
+~~~text
+metrics.json
+metadata.json
+~~~
+
+El código actual ya fue corregido.
+
+Ahora el orden es:
+
+~~~text
+entrenar
+  ↓
+model.pkl
+  ↓
+metrics.json
+  ↓
+metadata.json
+  ↓
+MLflow
+~~~
+
+## Si ya tienes una v1 incompleta
+
+Primero revisa:
+
+### Windows
+
+~~~powershell
+dir models\v1
+~~~
+
+### macOS / Linux
+
+~~~bash
+ls -la models/v1
+~~~
+
+Si únicamente aparece `model.pkl` y quieres reconstruir v1 desde cero, elimina **solo esa versión incompleta**.
+
+### Windows
+
+~~~powershell
+Remove-Item -Recurse -Force .\models\v1
+~~~
+
+### macOS / Linux
+
+~~~bash
+rm -rf models/v1
+~~~
+
+Después vuelve a ejecutar:
+
+### Windows
+
+~~~powershell
+python src\train.py --version v1 --n-estimators 100
+~~~
+
+### macOS / Linux
+
+~~~bash
+python src/train.py --version v1 --n-estimators 100
+~~~
+
+Otra posibilidad es usar deliberadamente:
+
+~~~bash
+python src/train.py --version v1 --n-estimators 100 --overwrite
+~~~
+
+pero para aprender versionado es preferible eliminar únicamente la versión incompleta y reconstruirla conscientemente.
+
+## Verificación rápida
+
+Después del entrenamiento:
+
+### Windows
+
+~~~powershell
+dir models\v1
+~~~
+
+### macOS / Linux
+
+~~~bash
+ls -la models/v1
+~~~
+
+Debes ver:
+
+~~~text
+model.pkl
+metrics.json
+metadata.json
+~~~
+
+---
+
+# 13. Abrir MLflow
 
 Ejecuta:
 
@@ -504,7 +832,7 @@ Detén MLflow con Ctrl + C cuando termines de revisarlo.
 
 ---
 
-# 12. Evitar sobrescribir v1
+# 14. Evitar sobrescribir v1
 
 Si vuelves a ejecutar:
 
@@ -528,7 +856,7 @@ Lo correcto para experimentar es crear una versión nueva.
 
 ---
 
-# 13. Crear v2
+# 15. Crear v2
 
 El laboratorio propone cambiar:
 
@@ -548,7 +876,16 @@ python src\train.py --version v2 --n-estimators 200
 python src/train.py --version v2 --n-estimators 200
 ~~~
 
-Ahora deberías tener:
+Antes de crear v2, asegúrate de que v1 contiene los tres archivos:
+
+~~~text
+models/v1/
+├── model.pkl
+├── metrics.json
+└── metadata.json
+~~~
+
+Después de ejecutar v2 deberías tener:
 
 ~~~text
 models/
@@ -562,6 +899,22 @@ models/
     └── metadata.json
 ~~~
 
+Puedes comprobarlo:
+
+## Windows
+
+~~~powershell
+dir models\v1
+dir models\v2
+~~~
+
+## macOS / Linux
+
+~~~bash
+ls -la models/v1
+ls -la models/v2
+~~~
+
 ## Concepto clave
 
 **v2 no significa automáticamente mejor.**
@@ -570,7 +923,7 @@ Una nueva versión es una nueva candidata que debe evaluarse.
 
 ---
 
-# 14. Comparar v1 y v2
+# 16. Comparar v1 y v2
 
 ## Windows
 
@@ -605,7 +958,7 @@ Es posible que v1 y v2 obtengan el mismo accuracy. Eso también es un resultado 
 
 ---
 
-# 15. Comparar runs en MLflow
+# 17. Comparar runs en MLflow
 
 Vuelve a iniciar:
 
@@ -636,7 +989,7 @@ en un solo lugar.
 
 ---
 
-# 16. Documentar qué versión seleccionarías
+# 18. Documentar qué versión seleccionarías
 
 El PDF pide decidir qué versión pasaría a producción y justificarla.
 
@@ -678,7 +1031,7 @@ qué métrica tenía
 
 ---
 
-# 17. Si v2 no mejora
+# 19. Si v2 no mejora
 
 No estás obligado a promover v2.
 
@@ -692,7 +1045,7 @@ python src/promote.py --version v1 --reason "v2 no aporta una mejora suficiente 
 
 ---
 
-# 18. Resultado esperado
+# 20. Resultado esperado
 
 La carpeta terminará aproximadamente así:
 
@@ -725,7 +1078,7 @@ mlflow.db permanece local.
 
 ---
 
-# 19. Git: versión del proyecto vs versión del modelo
+# 21. Git: versión del proyecto vs versión del modelo
 
 No confundas:
 
@@ -746,7 +1099,7 @@ En proyectos reales, modelos grandes o checkpoints de deep learning normalmente 
 
 ---
 
-# 20. Revisar cambios antes del commit
+# 22. Revisar cambios antes del commit
 
 Regresa a la raíz del repositorio.
 
@@ -778,7 +1131,7 @@ No uses git add . automáticamente sin revisar.
 
 ---
 
-# 21. Agregar solamente la práctica
+# 23. Agregar solamente la práctica
 
 ~~~bash
 git add demostraciones_t17_t18/tema17_versionado_artefactos_mlflow
@@ -796,7 +1149,7 @@ __pycache__/
 
 ---
 
-# 22. Crear un commit
+# 24. Crear un commit
 
 ~~~bash
 git commit -m "Completa laboratorio Tema 17 y compara versiones del modelo"
@@ -806,7 +1159,7 @@ Un commit crea un punto trazable en el historial del proyecto.
 
 ---
 
-# 23. Actualizar antes de subir
+# 25. Actualizar antes de subir
 
 Si tienes permiso de escritura en el repositorio:
 
@@ -822,7 +1175,7 @@ Si aparece un conflicto, resuélvelo antes de continuar.
 
 ---
 
-# 24. Subir cambios a GitHub
+# 26. Subir cambios a GitHub
 
 Solo si tienes permiso:
 
@@ -850,7 +1203,7 @@ Pueden:
 
 ---
 
-# 25. ¿Qué significa actualizar versión?
+# 27. ¿Qué significa actualizar versión?
 
 Hay dos acciones diferentes.
 
@@ -893,7 +1246,7 @@ entrenar
 
 ---
 
-# 26. Ejecución rápida para demostración
+# 28. Ejecución rápida para demostración
 
 Una vez comprendido el proceso manual:
 
@@ -921,7 +1274,7 @@ Estos scripts son atajos. La finalidad del laboratorio es comprender qué hace c
 
 ---
 
-# 27. Preguntas de cierre
+# 29. Preguntas de cierre
 
 Al terminar debes poder responder:
 
