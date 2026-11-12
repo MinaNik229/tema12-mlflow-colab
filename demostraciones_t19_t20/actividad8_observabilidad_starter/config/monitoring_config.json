@@ -1,0 +1,23 @@
+{
+  "project_name": "actividad8_demo",
+  "modality": "tabular_demo",
+  "columns": {
+    "quality": "quality_score",
+    "latency_ms": "latency_ms",
+    "is_error": "is_error"
+  },
+  "drift_features": ["feature_1", "feature_2", "feature_3"],
+  "thresholds": {
+    "quality": {"direction": "min", "warning": 0.80, "critical": 0.70},
+    "latency_p95_ms": {"direction": "max", "warning": 350.0, "critical": 500.0},
+    "error_rate": {"direction": "max", "warning": 0.05, "critical": 0.10},
+    "drift_psi": {"direction": "max", "warning": 0.10, "critical": 0.25}
+  },
+  "service_slo": {
+    "success_rate_target": 0.95
+  },
+  "mlflow": {
+    "enabled": true,
+    "experiment_name": "Actividad8_Observabilidad"
+  }
+}
