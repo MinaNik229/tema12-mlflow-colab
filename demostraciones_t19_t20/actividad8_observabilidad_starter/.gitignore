@@ -1,0 +1,10 @@
+.venv/
+__pycache__/
+*.pyc
+mlflow.db
+mlruns/
+mlartifacts/
+outputs/*
+!outputs/README.md
+data/baseline.csv
+data/current.csv
