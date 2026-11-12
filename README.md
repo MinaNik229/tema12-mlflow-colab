@@ -240,6 +240,7 @@ Incluye:
 - MLflow;
 - comparación v1/v2;
 - selección documentada de versión;
+- artefactos generados localmente para que cada alumno parta de un estado limpio;
 - actualización del repositorio con Git.
 
 Índice del Módulo 3:
@@ -397,7 +398,7 @@ mlruns/
 mlartifacts/
 ```
 
-Algunas prácticas didácticas pueden permitir pequeños `.pkl` versionados dentro de una carpeta específica para visualizar el concepto de versiones. Los modelos grandes o checkpoints de deep learning deberían almacenarse en un Model Registry o sistema de artefactos, no directamente en Git.
+En las prácticas actuales, los artefactos generados al entrenar modelos se mantienen localmente y se excluyen de Git cuando podrían interferir con la ejecución de otros alumnos. En particular, el Tema 17 genera `models/v1/`, `models/v2/` y `models/production.json` en cada computadora. Los modelos grandes o checkpoints de deep learning deberían almacenarse en un Model Registry o sistema de artefactos, no directamente en Git.
 
 ---
 

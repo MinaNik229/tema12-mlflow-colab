@@ -76,7 +76,7 @@ tema17_versionado_artefactos_mlflow/
 │   ├── compare_versions.py
 │   └── promote.py
 ├── models/
-│   └── README.md
+│   └── README.md          # vacío de resultados al clonar; v1/v2 se generan localmente
 ├── requirements.txt
 ├── demo.ps1
 ├── demo.sh
@@ -298,6 +298,52 @@ python -c "import pandas, sklearn, mlflow, joblib; print('Dependencias OK')"
 ~~~
 
 Si en macOS/Linux python no funciona después de activar el entorno, utiliza python3.
+
+---
+
+## Importante: models/ debe estar limpio al comenzar
+
+Al clonar el repositorio, la carpeta:
+
+~~~text
+models/
+~~~
+
+debe contener únicamente:
+
+~~~text
+README.md
+~~~
+
+No debe venir con `v1/`, `v2/` ni `production.json`.
+
+Esos archivos son **resultados de ejecución** y cada alumno los creará durante la práctica.
+
+Esto permite que:
+
+~~~text
+todos comiencen desde el mismo estado
+        ↓
+cada alumno genere su propia v1
+        ↓
+cada alumno genere su propia v2
+        ↓
+cada alumno compare sus resultados
+~~~
+
+Puedes comprobarlo antes de empezar.
+
+### Windows
+
+~~~powershell
+dir models
+~~~
+
+### macOS / Linux
+
+~~~bash
+ls -la models
+~~~
 
 ---
 
@@ -1093,7 +1139,21 @@ models/v2
   → otra versión del artefacto
 ~~~
 
-En este laboratorio los modelos son pequeños y se permite versionarlos con Git con fines didácticos.
+En esta práctica, los resultados generados dentro de `models/v1/`, `models/v2/`, etc. **no se suben al repositorio docente**. Cada alumno debe generarlos localmente al ejecutar el laboratorio.
+
+Esto evita que un estudiante clone el repositorio y encuentre versiones ya existentes que bloqueen o alteren su propia ejecución.
+
+Git se utiliza aquí para versionar principalmente:
+
+~~~text
+código
+configuración
+README
+scripts
+tests
+~~~
+
+Mientras que las versiones del modelo y sus resultados se generan localmente y se siguen mediante MLflow y los archivos de la propia práctica.
 
 En proyectos reales, modelos grandes o checkpoints de deep learning normalmente deben ir a un Model Registry o almacén de artefactos.
 
@@ -1138,14 +1198,23 @@ git add demostraciones_t17_t18/tema17_versionado_artefactos_mlflow
 git status
 ~~~
 
+Aunque uses ese comando, el `.gitignore` evita que se agreguen los resultados locales de la práctica.
+
 No deberían agregarse:
 
 ~~~text
 .venv/
 mlflow.db
 mlruns/
+mlartifacts/
 __pycache__/
+models/v1/
+models/v2/
+models/v3/
+models/production.json
 ~~~
+
+Si alguno de esos archivos aparece preparado para commit, detente y revisa el `.gitignore` antes de continuar.
 
 ---
 
@@ -1199,7 +1268,7 @@ Pueden:
 1. realizar la práctica localmente;
 2. crear commits locales;
 3. trasladar la estructura a su propio proyecto;
-4. versionar allí sus modelos, métricas y documentación.
+4. versionar allí su código y documentación, y utilizar MLflow o un sistema de artefactos para el seguimiento de sus modelos.
 
 ---
 
