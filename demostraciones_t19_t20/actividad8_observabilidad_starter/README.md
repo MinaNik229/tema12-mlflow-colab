@@ -521,7 +521,6 @@ bash demo.sh ui
 
 # 16. Antes de subir cambios a Git
 
-Los resultados de ejecución están ignorados para evitar que interfieran con otros alumnos.
 
 Revisa siempre:
 
