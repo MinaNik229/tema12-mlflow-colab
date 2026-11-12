@@ -1,11 +1,12 @@
 # models/
 
-Esta carpeta almacenará los artefactos generados por la práctica.
+Esta carpeta está vacía al clonar el repositorio, salvo por este README.
 
-Después de ejecutar v1 y v2 se espera una estructura semejante a:
+Los artefactos se generan **localmente** cuando cada alumno ejecuta la práctica. Después de crear v1 y v2 se espera una estructura semejante a:
 
 ```text
 models/
+├── README.md
 ├── v1/
 │   ├── model.pkl
 │   ├── metrics.json
@@ -17,4 +18,6 @@ models/
 └── production.json
 ```
 
-En proyectos reales, modelos grandes no deberían almacenarse directamente en Git. Para eso se utilizan registros de modelos y almacenes de artefactos, como MLflow Model Registry o almacenamiento de objetos. En este laboratorio los archivos son pequeños y se permiten con fines didácticos.
+Estos resultados están excluidos de Git mediante el `.gitignore` de la práctica. La razón es didáctica: **cada estudiante debe generar sus propias versiones**, comparar sus métricas y documentar su propia decisión de promoción.
+
+En proyectos reales, los modelos y checkpoints tampoco suelen almacenarse directamente en Git. Para eso se utilizan sistemas como MLflow Model Registry, almacenamiento de objetos o repositorios especializados de artefactos.
